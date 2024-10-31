@@ -1,4 +1,3 @@
-package imageToAscii;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -52,29 +51,8 @@ public class ImageToAscii {
                 
                 currentLuminance = getLuminanceOfPixel(currentHeight, currentWidth);
                 
-                if (currentLuminance == 0) {
-                    writeCharToMatrix('#', currentWidth, currentHeight);
-                } else if (currentLuminance < 0.1) {
-                    writeCharToMatrix('X', currentWidth, currentHeight);
-                } else if (currentLuminance >= 0.1 && currentLuminance < 0.2) {
-                    writeCharToMatrix('%', currentWidth, currentHeight);
-                } else if (currentLuminance >= 0.2 && currentLuminance < 0.3) {
-                    writeCharToMatrix('&', currentWidth, currentHeight);
-                } else if (currentLuminance >= 0.3 && currentLuminance < 0.4) {
-                    writeCharToMatrix('*', currentWidth, currentHeight);
-                } else if (currentLuminance >= 0.4 && currentLuminance < 0.5) {
-                    writeCharToMatrix('+', currentWidth, currentHeight);
-                } else if (currentLuminance >= 0.5 && currentLuminance < 0.6) {
-                    writeCharToMatrix('/', currentWidth, currentHeight);
-                } else if (currentLuminance >= 0.6 && currentLuminance < 0.7) {
-                    writeCharToMatrix('(', currentWidth, currentHeight);
-                } else if (currentLuminance >= 0.7 && currentLuminance < 0.8) {
-                    writeCharToMatrix('-', currentWidth, currentHeight);
-                } else if (currentLuminance >= 0.8 && currentLuminance < 0.9) {
-                    writeCharToMatrix('\'', currentWidth, currentHeight);
-                } else {
-                    writeCharToMatrix(' ', currentWidth, currentHeight);
-                }
+                writeCharToMatrix(luminanceToChar(currentLuminance), currentWidth, currentHeight);
+
             }
         }
 
@@ -105,7 +83,6 @@ public class ImageToAscii {
     }
 
     private float getLuminanceOfPixel (int x, int y) {
-        
         // taken at https://stackoverflow.com/a/21210977
         
         int color = this.image.getRGB(x, y);
@@ -117,6 +94,32 @@ public class ImageToAscii {
         
         // calc luminance in range 0.0 to 1.0; using SRGB luminance constants
         return (red * 0.2126f + green * 0.7152f + blue * 0.0722f) / 255;
+    }
+
+    private char luminanceToChar (float luminance) {
+        if (luminance == 0) {
+            return '#';
+        } else if (luminance < 0.1) {
+            return 'X';
+        } else if (luminance >= 0.1 && luminance < 0.2) {
+            return '%';
+        } else if (luminance >= 0.2 && luminance < 0.3) {
+            return '&';
+        } else if (luminance >= 0.3 && luminance < 0.4) {
+            return '*';
+        } else if (luminance >= 0.4 && luminance < 0.5) {
+            return '+';
+        } else if (luminance >= 0.5 && luminance < 0.6) {
+            return '/';
+        } else if (luminance >= 0.6 && luminance < 0.7) {
+            return '(';
+        } else if (luminance >= 0.7 && luminance < 0.8) {
+            return '-';
+        } else if (luminance >= 0.8 && luminance < 0.9) {
+            return '\'';
+        } else {
+            return ' ';
+        }
     }
 
     private void writeCharToMatrix (char c, int xPos, int yPos) {
