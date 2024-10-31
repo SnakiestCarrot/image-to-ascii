@@ -6,9 +6,9 @@ Usage:
 
 1. Navigate to the directory containing the downloaded files.
 
-2. Compile the ImageToAscii.java file writing "javac ImageToAscii.java" in the terminal.
+2. Compile the ImageToAscii.java file writing "javac ImageToAscii.java" in your terminal.
 
-3. Run the compiled file by writing "java ImageToAscii path\to\your\image.png".
+3. Run the compiled file by writing "java ImageToAscii path\to\your\image.png" in your terminal.
 
 I would recommend putting the image to convert in the same directory.
 
