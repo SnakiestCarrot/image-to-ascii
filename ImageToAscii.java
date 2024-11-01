@@ -7,18 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class ImageToAscii {
-    public static void main (String[] args) {
-    
-        String filePath = args[0];
-
-        ImageToAscii imageToAscii = new ImageToAscii(filePath);
-        imageToAscii.imageToAscii();
-    }
-
     
     File imageFile;
     BufferedImage image;
-    char[][] characterMatrix;
     int imageWidth;
     int imageHeight;
     
@@ -28,58 +19,31 @@ public class ImageToAscii {
             this.image = ImageIO.read(imageFile);
             if (this.image != null) {
                 System.out.println("Image succesfully read.");
-                System.out.println();
-                imageWidth = this.image.getWidth();
-                imageHeight = this.image.getHeight();
-                characterMatrix = new char[imageHeight][imageWidth];
-
+                this.imageWidth = this.image.getWidth();
+                this.imageHeight = this.image.getHeight();
             } else {
                 System.out.println("Image did not read properly.");
             }
-            
         } catch (IOException e) {
             System.out.println("Cant read image, try again.");
         }
-        
     }
    
-
-    public void imageToAscii () {
-        float currentLuminance;
-        for (int currentHeight = 0; currentHeight < imageHeight; currentHeight++) {
-            for (int currentWidth = 0; currentWidth < imageWidth; currentWidth++) {
-                
-                currentLuminance = getLuminanceOfPixel(currentHeight, currentWidth);
-                
-                writeCharToMatrix(luminanceToChar(currentLuminance), currentWidth, currentHeight);
-
-            }
-        }
-
+    public void imageToAscii (int scaling) {
         String name = imageFile.getName();
-
         String filePath = name.substring(0, name.indexOf("."))+".txt";
-        
-       
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
-            for (int currentHeight = 0; currentHeight < imageHeight; currentHeight+=2) {
-                for (int currentWidth = 0; currentWidth < imageWidth; currentWidth++) {
-                    writer.print(characterMatrix[currentWidth][currentHeight]);
+            for (int currentHeight = 0; currentHeight < imageHeight; currentHeight += 2 * scaling) {
+                for (int currentWidth = 0; currentWidth < imageWidth; currentWidth += 1 * scaling) {
+                    writer.print(luminanceToChar(getLuminanceOfPixel(currentWidth, currentHeight)));
                 }
                 writer.print("\n");
             }
-            
-            
-            
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file.");
             e.printStackTrace();
         }
-        
         System.out.println("Output has been written to " + filePath);
-
-
-
     }
 
     private float getLuminanceOfPixel (int x, int y) {
@@ -122,11 +86,30 @@ public class ImageToAscii {
         }
     }
 
-    private void writeCharToMatrix (char c, int xPos, int yPos) {
-        characterMatrix[yPos][xPos] = c;
+    private static void printHelp () {
+        System.out.println("Usage:");
+        System.out.println("java ImageToAscii pathToYourImage.png (downscaling coefficient) <-- has to be int and is optional");
     }
 
+    public static void main (String[] args) {
+    
 
+        if (args[0].equals("help")) {
+            printHelp();
+        } else {
+            String filePath = args[0];
+            int scaling;
+            if (args.length == 2) {
+                scaling = Integer.parseInt(args[1]);
+            } else {
+                scaling = 1;
+            }
+            ImageToAscii imageToAscii = new ImageToAscii(filePath);
+            imageToAscii.imageToAscii(scaling);
+        }
+
+        
+    }
 
 
 }
