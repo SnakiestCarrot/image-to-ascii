@@ -1,10 +1,10 @@
 
 <div align="center">
-<pre>
-
-</pre>
 
 ## Java program to convert an image to ASCII text.
+
+
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
