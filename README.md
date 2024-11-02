@@ -1,3 +1,16 @@
+
+<div align="center">
+<pre>
+
+</pre>
+
+Java program to convert an image to ASCII text.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
+
+
 Inspired by https://github.com/isaksolheim/image-to-ascii
 
 This is a small project that I put together in one evening that takes an image and generates a text file with ascii that tries to resemble the input image.
