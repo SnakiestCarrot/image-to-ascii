@@ -8,17 +8,65 @@ import java.io.PrintWriter;
 
 public class ImageToAscii {
     
+    /**
+     * Main method handling the input arguments at command line
+     * @param args
+     */
+    public static void main (String[] args) {
+        // If user wants help
+        if (args[0].equals("help")) {
+            printHelp();
+        } else {
+            String filePath = args[0];
+            int scaling;
+            if (args.length == 2) {
+                scaling = Integer.parseInt(args[1]);
+            } else {
+                scaling = 1;
+            }
+
+            // Create ImageToAscii object
+            ImageToAscii imageToAscii = new ImageToAscii(filePath);
+
+            // Call the imageToAscii method to convert the image to ASCII
+            imageToAscii.imageToAscii(scaling);
+
+            // Print message of where ascii has been written to
+            System.out.println("Output has been written to " + filePath.substring(0, filePath.indexOf("."))+".txt");
+        }
+    }
+
+    /**
+     * Prints help message
+     */
+    private static void printHelp () {
+        System.out.println("Usage:");
+        System.out.println("java ImageToAscii pathToYourImage.png (downscaling coefficient) <-- has to be int and is optional");
+    }
+    
+    // The file containing the image to be converted
     File imageFile;
+
+    // Where the buffered image will be held to access pixels and their colors
     BufferedImage image;
+
+    // The measurments of the image
     int imageWidth;
     int imageHeight;
     
+    /**
+     * Constructor for the ImageToAscii object
+     * 
+     * Takes a file path as parameter for the image to be converted
+     * 
+     * @param filePath
+     */
     public ImageToAscii (String filePath) {
         imageFile = new File(filePath);
         try {
             this.image = ImageIO.read(imageFile);
             if (this.image != null) {
-                System.out.println("Image succesfully read.");
+                System.out.println("Image " + filePath + " succesfully read.");
                 this.imageWidth = this.image.getWidth();
                 this.imageHeight = this.image.getHeight();
             } else {
@@ -43,7 +91,6 @@ public class ImageToAscii {
             System.out.println("An error occurred while writing to the file.");
             e.printStackTrace();
         }
-        System.out.println("Output has been written to " + filePath);
     }
 
     private float getLuminanceOfPixel (int x, int y) {
@@ -85,31 +132,4 @@ public class ImageToAscii {
             return ' ';
         }
     }
-
-    private static void printHelp () {
-        System.out.println("Usage:");
-        System.out.println("java ImageToAscii pathToYourImage.png (downscaling coefficient) <-- has to be int and is optional");
-    }
-
-    public static void main (String[] args) {
-    
-
-        if (args[0].equals("help")) {
-            printHelp();
-        } else {
-            String filePath = args[0];
-            int scaling;
-            if (args.length == 2) {
-                scaling = Integer.parseInt(args[1]);
-            } else {
-                scaling = 1;
-            }
-            ImageToAscii imageToAscii = new ImageToAscii(filePath);
-            imageToAscii.imageToAscii(scaling);
-        }
-
-        
-    }
-
-
 }
