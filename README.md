@@ -10,7 +10,7 @@
 
 Inspired by https://github.com/isaksolheim/image-to-ascii
 
-This is a small project that I put together in one evening that takes an image and generates a text file with ascii that tries to resemble the input image.
+This is a small project that I put together in one evening that takes an image and generates a text file that tries to resemble the input image with ascii characters.
 
 ## Usage
 
@@ -47,7 +47,7 @@ Get help on how to use:
 java ImageToAscii help
 ```
 
-This will create ascii representation of the provided example image in "me.txt"
+This will create ascii representation of the provided example image "me.png" and output it in "me.txt":
 ```
 java ImageToAscii me.png
 ```
