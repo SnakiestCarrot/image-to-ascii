@@ -41,7 +41,7 @@ java ImageToAscii path\to\your\image.png 2
 ```
 ## Examples
 
-Get help on how to use:
+Will print the help documentation to console:
 
 ```
 java ImageToAscii help
