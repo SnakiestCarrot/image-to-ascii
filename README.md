@@ -3,7 +3,7 @@
 
 ## Java program to convert an image to ASCII text.
 
-![Static Badge](https://img.shields.io/badge/Java-1A2BE2)
+![Static Badge](https://img.shields.io/badge/Java-B07219)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
