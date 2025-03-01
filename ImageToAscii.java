@@ -29,7 +29,7 @@ public class ImageToAscii {
             ImageToAscii imageToAscii = new ImageToAscii(filePath);
 
             // Call the imageToAscii method to convert the image to ASCII
-            imageToAscii.imageToAscii(scaling);
+            imageToAscii.convert(scaling);
 
             // Print message of where ascii has been written to
             System.out.println("Output has been written to " + filePath.substring(0, filePath.indexOf("."))+".txt");
@@ -77,7 +77,7 @@ public class ImageToAscii {
         }
     }
    
-    public void imageToAscii (int scaling) {
+    public void convert (int scaling) {
         String name = imageFile.getName();
         String filePath = name.substring(0, name.indexOf("."))+".txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
