@@ -50,7 +50,7 @@ public class ImageToAscii {
     // Where the buffered image will be held to access pixels and their colors
     BufferedImage image;
 
-    // The measurments of the image
+    // The measurements of the image
     int imageWidth;
     int imageHeight;
     
